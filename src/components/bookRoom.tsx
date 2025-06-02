@@ -1,7 +1,7 @@
 import type { Dayjs } from "dayjs";
 import type { FormEvent } from "react";
 import React, { useState } from "react";
-import { getRooms } from "../api/rooms";
+import { getAvailableRooms } from "../api/rooms";
 import { NumberBox } from "./textBox";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
@@ -18,7 +18,7 @@ export default function BookRoom({ onRoomsFound }) {
     // Check if user provided either min capacity OR both start and end times
     if (start && end) {
       try {
-        const response = await getRooms({
+        const response = await getAvailableRooms({
           min_capacity: minCapacity,
           start_datestr: start.format(),
           end_datestr: end.format(),

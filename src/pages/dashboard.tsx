@@ -9,7 +9,7 @@ import RoomList from "../components/roomList";
 import BookingList from "../components/bookingList";
 import { getBookings, makeBooking, makeBookingRequest } from "../api/bookings";
 import type { GetRoomsReq } from "../api/requestTypes";
-import { getRooms } from "../api/rooms";
+import { getAvailableRooms } from "../api/rooms";
 
 export default function Dashboard() {
   const [rooms, setRooms] = useState<RoomRes[]>([]);
@@ -28,10 +28,6 @@ export default function Dashboard() {
 
     fetchBookings();
   }, [success]);
-
-  useEffect(() => {
-    console.log(rooms);
-  }, [rooms]);
 
   const handleRoomsFound = (foundRooms: GetRoomsRes) => {
     setFilters(foundRooms.filters);
@@ -52,7 +48,7 @@ export default function Dashboard() {
           setSuccess(
             `Succeessfully made request to book Room ${response.data.room_number}`
           );
-          getRooms({
+          getAvailableRooms({
             min_capacity: filters.min_capacity,
             start_datestr: filters.start_datestr,
             end_datestr: filters.end_datestr,
@@ -63,7 +59,7 @@ export default function Dashboard() {
           setSuccess(
             `Succeessfully made booking on Room ${response.data.room_number}`
           );
-          getRooms({
+          getAvailableRooms({
             min_capacity: filters.min_capacity,
             start_datestr: filters.start_datestr,
             end_datestr: filters.end_datestr,
@@ -79,16 +75,8 @@ export default function Dashboard() {
       .catch(() => alert("Unable to sign out"));
   };
 
-  const handleCreateRoom = () => {
-    alert("Opening create room form...");
-  };
-
-  const handleViewRequests = () => {
-    alert("Viewing room requests...");
-  };
-
   const handleAssignRoles = () => {
-    alert("Opening role assignment...");
+    navigate("/admin");
   };
 
   return (
@@ -100,19 +88,9 @@ export default function Dashboard() {
 
             <div className="flex flex-wrap gap-3">
               {isAdmin && (
-                <>
-                  <NavigationButton onClick={handleCreateRoom} color="green">
-                    Create Room
-                  </NavigationButton>
-
-                  <NavigationButton onClick={handleViewRequests} color="orange">
-                    View Requests
-                  </NavigationButton>
-
-                  <NavigationButton onClick={handleAssignRoles} color="purple">
-                    Assign Roles
-                  </NavigationButton>
-                </>
+                <NavigationButton onClick={handleAssignRoles} color="purple">
+                  Admin Dashboard
+                </NavigationButton>
               )}
               <NavigationButton onClick={handleSignOut} color="gray">
                 Sign Out

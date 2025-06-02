@@ -2,10 +2,14 @@ import type { RoomRes } from "../api/responseTypes";
 
 export default function RoomTile({
   room,
+  admin,
+  handleDelete,
   onBook,
 }: {
   room: RoomRes;
-  onBook: (room: RoomRes) => void;
+  admin: boolean;
+  handleDelete?: (room_number: string) => Promise<void>;
+  onBook?: (room: RoomRes) => void;
 }) {
   const canBook = room.available !== false;
 
@@ -22,23 +26,35 @@ export default function RoomTile({
           </p>
         </div>
         <div className="ml-4 flex flex-col items-end gap-2">
-          <button
-            onClick={() => onBook(room)}
-            disabled={!canBook}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition ${
-              canBook
-                ? room.request_only
-                  ? "bg-yellow-600 hover:bg-yellow-700 text-white cursor-pointer"
-                  : "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
-          >
-            {room.available === false
-              ? "Unavailable"
-              : room.request_only
-              ? "Request"
-              : "Book"}
-          </button>
+          {admin && handleDelete && (
+            <button
+              onClick={() => handleDelete(room.room_number)}
+              className={
+                "px-4 py-2 rounded-md text-sm font-medium transition bg-red-600 hover:bg-red-700 text-white cursor-pointer"
+              }
+            >
+              Delete
+            </button>
+          )}
+          {onBook && (
+            <button
+              onClick={() => onBook(room)}
+              disabled={!canBook}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition ${
+                canBook
+                  ? room.request_only
+                    ? "bg-yellow-600 hover:bg-yellow-700 text-white cursor-pointer"
+                    : "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
+            >
+              {room.available === false
+                ? "Unavailable"
+                : room.request_only
+                ? "Request"
+                : "Book"}
+            </button>
+          )}
         </div>
       </div>
     </div>
