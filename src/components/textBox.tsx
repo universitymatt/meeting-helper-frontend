@@ -35,7 +35,7 @@ export function TextBox({ label, value, setValue, optional }: Props) {
 
 export function NumberBox({ label, value, setValue, optional }: NumberProps) {
   return (
-    <div className="mb-4">
+    <div>
       <label
         htmlFor={label}
         className="block text-lg font-medium float-left mb-1"

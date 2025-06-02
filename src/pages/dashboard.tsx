@@ -94,7 +94,7 @@ export default function Dashboard() {
   return (
     <div className="h-screen flex flex-col">
       <div className="mx-auto w-full flex flex-col h-full">
-        <div className="bg-white shadow-lg p-6 mb-8 flex-shrink-0">
+        <div className="bg-white shadow-lg p-6 flex-shrink-0">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
 
@@ -120,17 +120,15 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-
+        <div className="flex flex-col flex-shrink-0">
+          <BookRoom onRoomsFound={handleRoomsFound} />
+        </div>
         <div className="flex flex-col lg:flex-row px-4 pb-4 gap-8 flex-1 min-h-0">
-          <div className="flex flex-col flex-shrink-0">
-            <BookRoom onRoomsFound={handleRoomsFound} />
-            <RoomList
-              rooms={rooms}
-              filters={filters}
-              handleBookRoom={handleBookRoom}
-            />
-          </div>
-
+          <RoomList
+            rooms={rooms}
+            filters={filters}
+            handleBookRoom={handleBookRoom}
+          />
           <BookingList bookings={bookings} setSuccess={setSuccess} />
         </div>
       </div>

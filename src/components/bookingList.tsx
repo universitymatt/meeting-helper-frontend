@@ -1,5 +1,6 @@
 import type { GetBookingsRes } from "../api/responseTypes";
 import BookingTile from "./bookingTile";
+import dayjs from "dayjs";
 
 export default function BookingList({
   bookings,
@@ -8,6 +9,46 @@ export default function BookingList({
   bookings?: GetBookingsRes;
   setSuccess: (set: string) => void;
 }) {
+  // Group bookings by day
+  const groupBookingsByDay = (bookings: GetBookingsRes) => {
+    const grouped = bookings.reduce((acc, booking) => {
+      const dayKey = dayjs(booking.start_time).format("YYYY-MM-DD");
+      if (!acc[dayKey]) {
+        acc[dayKey] = [];
+      }
+      acc[dayKey].push(booking);
+      return acc;
+    }, {} as Record<string, typeof bookings>);
+
+    // Sort days chronologically and sort bookings within each day
+    return Object.entries(grouped)
+      .sort(([a], [b]) => dayjs(a).diff(dayjs(b)))
+      .map(([date, dayBookings]) => ({
+        date,
+        bookings: dayBookings.sort((a, b) =>
+          dayjs(a.start_time).diff(dayjs(b.start_time))
+        ),
+      }));
+  };
+
+  const formatDayHeader = (date: string) => {
+    const day = dayjs(date);
+    const today = dayjs();
+    const tomorrow = today.add(1, "day");
+
+    if (day.isSame(today, "day")) {
+      return "Today";
+    } else if (day.isSame(tomorrow, "day")) {
+      return "Tomorrow";
+    } else if (day.diff(today, "day") < 7) {
+      return day.format("dddd"); // Monday, Tuesday, etc.
+    } else {
+      return day.format("dddd, MMM D"); // Monday, Dec 25
+    }
+  };
+
+  const groupedBookings = bookings ? groupBookingsByDay(bookings) : [];
+
   return (
     <div className="flex-1 flex flex-col">
       <div className="bg-white rounded-2xl shadow-lg flex flex-col h-full">
@@ -38,13 +79,31 @@ export default function BookingList({
               <p className="text-gray-500">You have no upcoming bookings</p>
             </div>
           ) : (
-            <div className="space-y-4">
-              {bookings?.map((booking) => (
-                <BookingTile
-                  booking={booking}
-                  setSuccess={setSuccess}
-                  key={booking.id}
-                />
+            <div className="space-y-6">
+              {groupedBookings.map(({ date, bookings: dayBookings }) => (
+                <div key={date}>
+                  {/* Day Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {formatDayHeader(date)}
+                    </h3>
+                    <span className="text-sm text-gray-500">
+                      {dayBookings.length} booking
+                      {dayBookings.length !== 1 ? "s" : ""}
+                    </span>
+                  </div>
+
+                  {/* Bookings for this day */}
+                  <div className="space-y-3">
+                    {dayBookings.map((booking) => (
+                      <BookingTile
+                        booking={booking}
+                        setSuccess={setSuccess}
+                        key={booking.id}
+                      />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           )}
