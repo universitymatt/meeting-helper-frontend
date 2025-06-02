@@ -16,23 +16,16 @@ export function Login() {
       return;
     }
 
-    console.log("Logging in with", username, password);
-    setError("");
     signIn({
       username: username,
       password: password,
     })
-      .then((response) => {
-        localStorage.setItem("access_token", response.data.access_token);
-        navigate("/dashboard");
-      })
+      .then(() => navigate("/"))
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          console.error("Bad Request:", error.response.data.detail);
           setError("Incorrect username or password");
         } else {
-          console.error("Other error:", error);
-          alert("An unexpected error occurred");
+          setError("An unexpected error occurred");
         }
       });
   };

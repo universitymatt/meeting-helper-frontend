@@ -22,7 +22,7 @@ export function SignUp() {
       username: username,
       password: password,
     })
-      .then(() => navigate("/dashboard"))
+      .then(() => navigate("/"))
       .catch((error) => {
         if (error.response && error.response.status === 400) {
           console.error("Bad Request:", error.response.data.detail);

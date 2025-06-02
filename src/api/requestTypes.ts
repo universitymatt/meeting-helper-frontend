@@ -8,7 +8,22 @@ export interface SignUpReq extends SignInReq {
 }
 
 export interface GetRoomsReq {
-  min_capacity: number;
-  datetime_start: number;
-  datetime_end: number;
+  start_datestr: string;
+  end_datestr: string;
+  min_capacity?: number;
+}
+
+export interface CreateRoomReq {
+  room_number: string;
+  capacity: number;
+  description?: string;
+  request_only?: boolean;
+}
+
+export interface CreateBookingReq {
+  room_number: string;
+  times: {
+    start_datestr: string;
+    end_datestr: string;
+  };
 }

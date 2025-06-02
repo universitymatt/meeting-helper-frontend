@@ -1,18 +1,14 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
-import { createRouter } from "./router";
-import { RouterProvider } from "react-router";
-
-const queryClient = new QueryClient();
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import Dashboard from "./pages/dashboard";
 
 export function App() {
-  const router = createRouter();
-
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Dashboard />
+      </LocalizationProvider>
     </div>
   );
 }

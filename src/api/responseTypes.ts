@@ -1,10 +1,16 @@
+import type { GetRoomsReq } from "./requestTypes";
+
 export type SignInRes = {
-  access_token: string;
-  token_type: string;
+  username: string;
+  name: string;
+  roles: string[];
 };
 
-type room = {
-  id: number;
+export type LogOutRes = {
+  message: string;
+};
+
+export type RoomRes = {
   room_number: string;
   capacity: number;
   description: string;
@@ -13,6 +19,20 @@ type room = {
 };
 
 export type GetRoomsRes = {
-  available_rooms: [room];
-  unavaileble_rooms: [room];
+  rooms: RoomRes[];
+  filters: GetRoomsReq;
 };
+
+export type BookingRes = {
+  id: number;
+  room_number: string;
+  start_time: Date;
+  end_time: Date;
+};
+
+export type DeleteBookingRes = {
+  id: number;
+  message: string;
+};
+
+export type GetBookingsRes = BookingRes[];

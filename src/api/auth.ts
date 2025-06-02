@@ -6,13 +6,21 @@ import type { SignInReq, SignUpReq } from "./requestTypes";
 export const signIn = (
   signIn: SignInReq
 ): Promise<AxiosResponse<SignInRes>> => {
-  return api.post("/token", signIn, {
+  return api.post("/users/token", signIn, {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   });
+};
+
+export const getMe = (): Promise<AxiosResponse<SignInRes>> => {
+  return api.get("/users/me");
 };
 
 export const signUp = (
   signUp: SignUpReq
 ): Promise<AxiosResponse<SignInRes>> => {
   return api.post("/users", signUp);
+};
+
+export const logOut = (): Promise<AxiosResponse<SignInRes>> => {
+  return api.post("/users/logout", signUp);
 };
