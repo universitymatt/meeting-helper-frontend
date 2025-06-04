@@ -4,7 +4,7 @@ interface AuthContextType {
   user?: {
     username: string;
     name: string;
-    roles: string[];
+    role_names: string[];
   };
 }
 

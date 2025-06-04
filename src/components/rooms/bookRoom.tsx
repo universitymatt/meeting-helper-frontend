@@ -1,8 +1,8 @@
 import type { Dayjs } from "dayjs";
 import type { FormEvent } from "react";
 import React, { useState } from "react";
-import { getAvailableRooms } from "../api/rooms";
-import { NumberBox } from "./textBox";
+import { getAvailableRooms } from "../../api/rooms";
+import { NumberBox } from "../textBox";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 export default function BookRoom({ onRoomsFound }) {

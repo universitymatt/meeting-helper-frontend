@@ -1,8 +1,8 @@
-import type { BookingRes } from "../api/responseTypes";
+import type { BookingRes } from "../../api/responseTypes";
 import type { Dayjs } from "dayjs";
 import { useState } from "react";
 import dayjs from "dayjs";
-import { deleteBooking } from "../api/bookings";
+import { deleteBooking } from "../../api/bookings";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 export default function BookingTile({

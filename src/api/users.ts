@@ -1,6 +1,6 @@
 import api from "./api";
 import type { AxiosResponse } from "axios";
-import type { SignInRes } from "./responseTypes";
+import type { Message, SignInRes } from "./responseTypes";
 import type { SignInReq, SignUpReq } from "./requestTypes";
 
 export const signIn = (
@@ -23,4 +23,15 @@ export const signUp = (
 
 export const logOut = (): Promise<AxiosResponse<SignInRes>> => {
   return api.post("/users/logout", signUp);
+};
+
+export const getAllUsers = (): Promise<AxiosResponse<SignInRes[]>> => {
+  return api.get("/users/all");
+};
+
+export const putUsersRoles = (
+  roles: string[],
+  username: string
+): Promise<AxiosResponse<Message>> => {
+  return api.put("/users/roles", { username: username, roles: roles });
 };

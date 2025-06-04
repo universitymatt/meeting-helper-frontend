@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
-import { signUp } from "../api/auth";
+import { signUp } from "../api/users";
 
 export function SignUp() {
   const [username, setUsername] = useState("");

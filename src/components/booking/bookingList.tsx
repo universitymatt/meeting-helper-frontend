@@ -1,4 +1,4 @@
-import type { GetBookingsRes } from "../api/responseTypes";
+import type { GetBookingsRes } from "../../api/responseTypes";
 import BookingTile from "./bookingTile";
 import dayjs from "dayjs";
 
@@ -52,7 +52,7 @@ export default function BookingList({
   return (
     <div className="flex-1 flex flex-col">
       <div className="bg-white rounded-2xl shadow-lg flex flex-col h-full">
-        {/* Header - Fixed */}
+        {/* Header */}
         <div className="p-6 border-b border-gray-200 flex-shrink-0">
           <h2 className="text-2xl font-bold">Your Upcoming Bookings</h2>
         </div>

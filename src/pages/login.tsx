@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
-import { signIn } from "../api/auth";
+import { signIn } from "../api/users";
 
 export function Login() {
   const [username, setUsername] = useState("");

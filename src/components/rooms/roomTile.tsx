@@ -1,13 +1,13 @@
-import type { RoomRes } from "../api/responseTypes";
+import type { RoomRes } from "../../api/responseTypes";
 
 export default function RoomTile({
   room,
-  admin,
+  admin = false,
   handleDelete,
   onBook,
 }: {
   room: RoomRes;
-  admin: boolean;
+  admin?: boolean;
   handleDelete?: (room_number: string) => Promise<void>;
   onBook?: (room: RoomRes) => void;
 }) {
@@ -24,6 +24,11 @@ export default function RoomTile({
           <p className="text-sm text-gray-500 mt-1">
             Capacity: {room.capacity} people
           </p>
+          {room.allowed_roles.length !== 0 && (
+            <p className="text-sm text-gray-500 mt-1">
+              Allowed roles: {room.allowed_roles.join(", ")}
+            </p>
+          )}
         </div>
         <div className="ml-4 flex flex-col items-end gap-2">
           {admin && handleDelete && (

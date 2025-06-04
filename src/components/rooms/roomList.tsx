@@ -1,5 +1,5 @@
-import type { GetRoomsReq } from "../api/requestTypes";
-import type { RoomRes } from "../api/responseTypes";
+import type { GetRoomsReq } from "../../api/requestTypes";
+import type { RoomRes } from "../../api/responseTypes";
 import RoomTile from "./roomTile";
 
 export default function RoomList({
@@ -27,7 +27,7 @@ export default function RoomList({
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <div className="bg-white rounded-2xl shadow-lg flex flex-col h-full">
-        {/* Header - Fixed */}
+        {/* Header */}
         <div className="p-6 border-b border-gray-200 flex-shrink-0">
           <div className="flex justify-between items-start">
             <div>

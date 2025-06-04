@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import type { BookingRes, GetRoomsRes, RoomRes } from "../api/responseTypes";
-import BookRoom from "../components/bookRoom";
+import BookRoom from "../components/rooms/bookRoom";
 import NavigationButton from "../components/navigationButton";
 import { useAuthContext } from "../auth/AuthContext";
-import { logOut } from "../api/auth";
+import { logOut } from "../api/users";
 import { useNavigate } from "react-router";
-import RoomList from "../components/roomList";
-import BookingList from "../components/bookingList";
+import RoomList from "../components/rooms/roomList";
+import BookingList from "../components/booking/bookingList";
 import { getBookings, makeBooking, makeBookingRequest } from "../api/bookings";
 import type { GetRoomsReq } from "../api/requestTypes";
 import { getAvailableRooms } from "../api/rooms";
@@ -17,7 +17,7 @@ export default function Dashboard() {
   const [bookings, setBookings] = useState<BookingRes[]>(null);
   const [success, setSuccess] = useState<string>(null);
   const authContext = useAuthContext();
-  const isAdmin = authContext.user?.roles.includes("admin");
+  const isAdmin = authContext.user?.role_names.includes("admin");
   const navigate = useNavigate();
 
   useEffect(() => {

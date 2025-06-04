@@ -23,8 +23,26 @@ export const makeBookingRequest = (
   return api.post("/bookings/request", booking);
 };
 
+export const getBookingRequests = (): Promise<
+  AxiosResponse<GetBookingsRes>
+> => {
+  return api.get("/bookings/request");
+};
+
 export const deleteBooking = (
   bookingId: number
 ): Promise<AxiosResponse<DeleteBookingRes>> => {
   return api.delete(`/bookings/${bookingId}`);
+};
+
+export const approveBookingRequest = (
+  bookingId: number
+): Promise<AxiosResponse<DeleteBookingRes>> => {
+  return api.put(`/bookings/${bookingId}/approve`);
+};
+
+export const declineBookingRequest = (
+  bookingId: number
+): Promise<AxiosResponse<DeleteBookingRes>> => {
+  return api.delete(`/bookings/${bookingId}/decline`);
 };

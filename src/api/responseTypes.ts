@@ -3,10 +3,10 @@ import type { GetRoomsReq } from "./requestTypes";
 export type SignInRes = {
   username: string;
   name: string;
-  roles: string[];
+  role_names: string[];
 };
 
-export type LogOutRes = {
+export type Message = {
   message: string;
 };
 
@@ -16,6 +16,7 @@ export type RoomRes = {
   description: string;
   available: boolean;
   request_only: boolean;
+  allowed_roles: string[];
 };
 
 export type GetRoomsRes = {
@@ -33,6 +34,10 @@ export type BookingRes = {
 export type DeleteBookingRes = {
   id: number;
   message: string;
+};
+
+export type Role = {
+  role: string;
 };
 
 export type GetBookingsRes = BookingRes[];
