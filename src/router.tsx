@@ -7,35 +7,44 @@ import AdminDashboard from "./pages/admin";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-const root = document.getElementById("root");
-if (root === null) throw new Error("Root container missing in index.html");
+// Get the base URL from Vite config
+const basename = import.meta.env.BASE_URL;
 
 export const createRouter = () =>
-  createBrowserRouter([
+  createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: (
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        ),
+      },
+      {
+        path: "/admin",
+        element: (
+          <AuthProvider admin={true}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
+              <AdminDashboard />
+            </LocalizationProvider>
+          </AuthProvider>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <SignUp />,
+      },
+      {
+        path: "*",
+        element: <div>404 - Page Not Found</div>,
+      },
+    ],
     {
-      path: "/meeting-helper-frontend/",
-      element: (
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      ),
-    },
-    {
-      path: "/meeting-helper-frontend/admin",
-      element: (
-        <AuthProvider admin={true}>
-          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
-            <AdminDashboard />
-          </LocalizationProvider>
-        </AuthProvider>
-      ),
-    },
-    {
-      path: "/meeting-helper-frontend/login",
-      element: <Login />,
-    },
-    {
-      path: "/meeting-helper-frontend/register",
-      element: <SignUp />,
-    },
-  ]);
+      basename: basename,
+    }
+  );
