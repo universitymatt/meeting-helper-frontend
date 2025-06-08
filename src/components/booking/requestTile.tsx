@@ -32,50 +32,46 @@ export default function RequestTile({
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-      {/* Header with booking info and action buttons */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-100">
+    <div className="border rounded-lg p-4 bg-white">
+      <div className="flex justify-between items-start mb-3">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">
-            Room {request.room_number}
-          </h3>
-          <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
-            <span>{dayjs(request.start_time).format("MMM D, h:mm A")}</span>
-            <span>→</span>
-            <span>{dayjs(request.end_time).format("MMM D, h:mm A")}</span>
-          </div>
+          <h3 className="font-semibold text-lg">Room {request.room_number}</h3>
+          <p className="text-gray-600">
+            Request made: {dayjs(request.datetime_made).format("MMM D, h:mm A")}
+          </p>
+          <p className="text-gray-600">Username: {request.username}</p>
         </div>
-
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2">
           {deleting && (
             <button
               onClick={() => setDeleting(false)}
-              className={
-                "px-3 py-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-md transition"
-              }
+              className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded"
             >
               Cancel
             </button>
           )}
           <button
             onClick={handleDelete}
-            className={`px-3 py-1.5 text-sm font-medium rounded-md transition ${
+            className={`px-3 py-1 text-sm rounded ${
               deleting
                 ? "bg-red-600 text-white hover:bg-red-700"
-                : "text-red-600 hover:text-red-700 hover:bg-red-50"
+                : "text-red-600 hover:bg-red-50"
             }`}
           >
             {deleting ? "Confirm" : "Decline"}
           </button>
           <button
             onClick={handleApprove}
-            className={
-              "px-3 py-1.5 text-sm font-medium rounded-md transition text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-            }
+            className="px-3 py-1 text-sm text-green-600 hover:bg-green-50 rounded"
           >
-            {"Approve"}
+            Approve
           </button>
         </div>
+      </div>
+
+      <div className="text-sm text-gray-700">
+        {dayjs(request.start_time).format("MMM D, h:mm A")} →{" "}
+        {dayjs(request.end_time).format("MMM D, h:mm A")}
       </div>
     </div>
   );

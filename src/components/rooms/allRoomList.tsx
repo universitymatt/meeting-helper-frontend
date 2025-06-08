@@ -3,17 +3,16 @@ import RoomTile from "./roomTile";
 import { deleteRoom, getAllRooms } from "../../api/rooms";
 import type { RoomRes } from "../../api/responseTypes";
 
-export default function AllRoomList() {
+export default function AllRoomList({ success, setSuccess }) {
   const [rooms, setRooms] = useState<RoomRes[]>([]);
-  const [success, setSuccess] = useState<string>();
 
   useEffect(() => {
-    const fetchBookings = async () => {
+    const fetchRooms = async () => {
       const response = await getAllRooms();
-      setRooms(response.data.rooms);
+      setRooms(response.data);
     };
 
-    fetchBookings();
+    fetchRooms();
   }, [success]);
 
   const handleDelete = async (room_number: string) => {
@@ -24,7 +23,7 @@ export default function AllRoomList() {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg flex flex-col h-full">
-      {/* Header - Fixed */}
+      {/* Header */}
       <div className="p-6 border-b border-gray-200 flex-shrink-0">
         <div className="flex justify-between items-start">
           <h2 className="text-2xl font-bold">All Rooms</h2>

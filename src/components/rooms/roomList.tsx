@@ -38,10 +38,10 @@ export default function RoomList({
               <div className="text-right">
                 <h2 className="text-2xl font-bold mb-2">Active Filters</h2>
                 <div className="text-sm text-gray-600 space-y-1">
-                  {filters.start_datestr && (
+                  {filters.start_datetime && (
                     <>
-                      <div>Start: {parseDate(filters.start_datestr)}</div>
-                      <div>End: {parseDate(filters.end_datestr)}</div>
+                      <div>Start: {parseDate(filters.start_datetime)}</div>
+                      <div>End: {parseDate(filters.end_datetime)}</div>
                     </>
                   )}
                   {filters.min_capacity !== 0 && (

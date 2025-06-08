@@ -5,7 +5,7 @@ import type {
 } from "./responseTypes";
 import api from "./api";
 import type { AxiosResponse } from "axios";
-import type { CreateBookingReq } from "./requestTypes";
+import type { CreateBookingReq, Times } from "./requestTypes";
 
 export const getBookings = (): Promise<AxiosResponse<GetBookingsRes>> => {
   return api.get("/bookings");
@@ -33,6 +33,13 @@ export const deleteBooking = (
   bookingId: number
 ): Promise<AxiosResponse<DeleteBookingRes>> => {
   return api.delete(`/bookings/${bookingId}`);
+};
+
+export const updateBooking = (
+  bookingId: number,
+  desired_times: Times
+): Promise<AxiosResponse<BookingRes>> => {
+  return api.put(`/bookings/${bookingId}`, desired_times);
 };
 
 export const approveBookingRequest = (

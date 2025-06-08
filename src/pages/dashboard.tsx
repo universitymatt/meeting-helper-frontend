@@ -10,6 +10,7 @@ import BookingList from "../components/booking/bookingList";
 import { getBookings, makeBooking, makeBookingRequest } from "../api/bookings";
 import type { GetRoomsReq } from "../api/requestTypes";
 import { getAvailableRooms } from "../api/rooms";
+import AlertBanner from "../components/alert";
 
 export default function Dashboard() {
   const [rooms, setRooms] = useState<RoomRes[]>([]);
@@ -38,10 +39,8 @@ export default function Dashboard() {
     if (filters) {
       const req = {
         room_number: room.room_number,
-        times: {
-          start_datestr: filters.start_datestr,
-          end_datestr: filters.end_datestr,
-        },
+        start_datetime: filters.start_datetime,
+        end_datetime: filters.end_datetime,
       };
       if (room.request_only) {
         makeBookingRequest(req).then((response) => {
@@ -50,8 +49,8 @@ export default function Dashboard() {
           );
           getAvailableRooms({
             min_capacity: filters.min_capacity,
-            start_datestr: filters.start_datestr,
-            end_datestr: filters.end_datestr,
+            start_datetime: filters.start_datetime,
+            end_datetime: filters.end_datetime,
           }).then((response) => handleRoomsFound(response.data));
         });
       } else {
@@ -61,8 +60,8 @@ export default function Dashboard() {
           );
           getAvailableRooms({
             min_capacity: filters.min_capacity,
-            start_datestr: filters.start_datestr,
-            end_datestr: filters.end_datestr,
+            start_datetime: filters.start_datetime,
+            end_datetime: filters.end_datetime,
           }).then((response) => handleRoomsFound(response.data));
         });
       }
@@ -101,6 +100,7 @@ export default function Dashboard() {
         <div className="flex flex-col flex-shrink-0">
           <BookRoom onRoomsFound={handleRoomsFound} />
         </div>
+        {success && <AlertBanner severity={"success"} detail={success} />}
         <div className="flex flex-col lg:flex-row px-4 pb-4 gap-8 flex-1 min-h-0">
           <RoomList
             rooms={rooms}

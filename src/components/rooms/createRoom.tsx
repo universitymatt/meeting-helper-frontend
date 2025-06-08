@@ -6,13 +6,12 @@ import MultipleSelect from "../multiSelect";
 import { getAllRoles } from "../../api/roles";
 import type { Role } from "../../api/responseTypes";
 
-export function CreateRoom() {
+export function CreateRoom({ success, setSuccess }) {
   const [roomNumber, setRoomNumber] = useState("");
   const [capacity, setCapacity] = useState(0);
   const [description, setDescription] = useState("");
   const [requestOnly, setRequestOnly] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState<string>("");
   const [allRoles, setAllRoles] = useState<Role[]>([]);
   const [roomRolesRequired, setRoomRolesRequired] = useState<string[]>([]);
 
@@ -80,7 +79,7 @@ export function CreateRoom() {
         />
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-lg font-medium float-left mb-1">
             Allowed Roles
           </label>
           <MultipleSelect
@@ -108,12 +107,6 @@ export function CreateRoom() {
         {error && (
           <div className="p-3 bg-red-50 border border-red-200 rounded-md">
             <p className="text-red-600 text-sm">{error}</p>
-          </div>
-        )}
-
-        {success && (
-          <div className="p-3 bg-green-50 border border-green-200 rounded-md">
-            <p className="text-green-600 text-sm">{success}</p>
           </div>
         )}
 

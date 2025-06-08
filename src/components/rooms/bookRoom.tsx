@@ -1,4 +1,4 @@
-import type { Dayjs } from "dayjs";
+import { type Dayjs } from "dayjs";
 import type { FormEvent } from "react";
 import React, { useState } from "react";
 import { getAvailableRooms } from "../../api/rooms";
@@ -15,19 +15,19 @@ export default function BookRoom({ onRoomsFound }) {
     e.preventDefault();
     setError("");
 
-    // Check if user provided either min capacity OR both start and end times
+    // Check if user provided at least both start and end times
     if (start && end) {
       try {
         const response = await getAvailableRooms({
           min_capacity: minCapacity,
-          start_datestr: start.format(),
-          end_datestr: end.format(),
+          start_datetime: start.format(),
+          end_datetime: end.format(),
         });
 
         onRoomsFound(response.data);
       } catch (error) {
-        if (error.response && error.response.status === 400) {
-          setError(error.response.data.detail);
+        if (error.response && error.response.status === 422) {
+          setError(error.response.data.detail[0].msg);
         } else {
           setError("An unexpected error occurred");
         }
@@ -78,6 +78,7 @@ export default function BookRoom({ onRoomsFound }) {
               value={start}
               minutesStep={15}
               onChange={(newValue) => setStart(newValue)}
+              format="DD/MM/YYYY HH:mm"
               slotProps={{
                 textField: {
                   size: "small",
@@ -92,6 +93,7 @@ export default function BookRoom({ onRoomsFound }) {
             <DateTimePicker
               label="End Time"
               value={end}
+              format="DD/MM/YYYY HH:mm"
               minutesStep={15}
               onChange={(newValue) => setEnd(newValue)}
               slotProps={{

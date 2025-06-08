@@ -17,6 +17,7 @@ export type RoomRes = {
   available: boolean;
   request_only: boolean;
   allowed_roles: string[];
+  sufficient_roles: boolean;
 };
 
 export type GetRoomsRes = {
@@ -26,9 +27,13 @@ export type GetRoomsRes = {
 
 export type BookingRes = {
   id: number;
-  room_number: string;
+  user_id: string;
+  username: string;
   start_time: Date;
   end_time: Date;
+  accepted: boolean;
+  datetime_made: string;
+  room_number: string;
 };
 
 export type DeleteBookingRes = {

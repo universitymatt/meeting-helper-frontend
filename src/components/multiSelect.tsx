@@ -39,13 +39,11 @@ export default function MultipleSelect({
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }} disabled={!editing}>
-        <InputLabel>Roles</InputLabel>
+      <FormControl fullWidth={true} disabled={!editing}>
         <Select
           multiple
           value={usersRoles}
           onChange={handleChange}
-          input={<OutlinedInput label="Roles" />}
           MenuProps={MenuProps}
         >
           {allRoles.map((role) => (

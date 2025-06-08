@@ -4,9 +4,8 @@ import { getAllUsers } from "../../api/users";
 import { getAllRoles } from "../../api/roles";
 import UserTile from "./userTile";
 
-export default function AllUsersList() {
+export default function AllUsersList({ success, setSuccess }) {
   const [users, setUsers] = useState<SignInRes[]>();
-  const [success, setSuccess] = useState<string>();
   const [allRoles, setAllRoles] = useState<Role[]>();
 
   useEffect(() => {
@@ -26,7 +25,7 @@ export default function AllUsersList() {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg flex flex-col h-full">
-      {/* Header - Fixed */}
+      {/* Header */}
       <div className="p-6 border-b border-gray-200 flex-shrink-0">
         <div className="flex justify-between items-start">
           <h2 className="text-2xl font-bold">All Users</h2>

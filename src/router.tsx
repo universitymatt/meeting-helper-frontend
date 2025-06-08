@@ -24,7 +24,7 @@ export const createRouter = () =>
       path: "/admin",
       element: (
         <AuthProvider admin={true}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
             <AdminDashboard />
           </LocalizationProvider>
         </AuthProvider>

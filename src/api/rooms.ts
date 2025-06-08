@@ -24,5 +24,5 @@ export const deleteRoom = (
 };
 
 export const getAllRooms = (): Promise<AxiosResponse<GetRoomsRes>> => {
-  return api.get("/rooms");
+  return api.get("/rooms/all");
 };
