@@ -30,7 +30,7 @@ export const AuthProvider = ({
     };
 
     fetchMe();
-  }, []);
+  }, [navigate]);
 
   return (
     <AuthContext.Provider value={{ user: user }}>
