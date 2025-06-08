@@ -13,7 +13,7 @@ if (root === null) throw new Error("Root container missing in index.html");
 export const createRouter = () =>
   createBrowserRouter([
     {
-      path: "/",
+      path: "/meeting-helper-frontend/",
       element: (
         <AuthProvider>
           <App />
@@ -21,7 +21,7 @@ export const createRouter = () =>
       ),
     },
     {
-      path: "/admin",
+      path: "/meeting-helper-frontend/admin",
       element: (
         <AuthProvider admin={true}>
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
@@ -31,11 +31,11 @@ export const createRouter = () =>
       ),
     },
     {
-      path: "/login",
+      path: "/meeting-helper-frontend/login",
       element: <Login />,
     },
     {
-      path: "/register",
+      path: "/meeting-helper-frontend/register",
       element: <SignUp />,
     },
   ]);
