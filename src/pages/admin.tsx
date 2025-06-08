@@ -16,12 +16,12 @@ export default function AdminDashboard() {
 
   const handleSignOut = async () => {
     logOut()
-      .then(() => navigate("/login"))
+      .then(() => navigate("/meeting-helper-frontend/login"))
       .catch(() => alert("Unable to sign out"));
   };
 
   const handleAssignRoles = () => {
-    navigate("/");
+    navigate("/meeting-helper-frontend/");
   };
 
   return (
