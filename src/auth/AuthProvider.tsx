@@ -21,11 +21,11 @@ export const AuthProvider = ({
         setUser(response.data);
         if (admin) {
           if (!response.data.role_names.includes("admin")) {
-            navigate("/meeting-helper-frontend/");
+            navigate("/");
           }
         }
       } catch (error: any) {
-        navigate("/meeting-helper-frontend/login");
+        navigate("/login");
       }
     };
 

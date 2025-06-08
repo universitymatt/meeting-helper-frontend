@@ -8,7 +8,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 // Get the base URL from Vite config
-const basename = import.meta.env.BASE_URL;
+const basename = import.meta.env.VITE_FE_BASE_URL;
 
 export const createRouter = () =>
   createBrowserRouter(

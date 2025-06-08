@@ -20,7 +20,7 @@ export function Login() {
       username: username,
       password: password,
     })
-      .then(() => navigate("/meeting-helper-frontend/"))
+      .then(() => navigate("/"))
       .catch((error) => {
         if (error.response && error.response.status === 400) {
           setError("Incorrect username or password");

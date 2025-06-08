@@ -70,12 +70,12 @@ export default function Dashboard() {
 
   const handleSignOut = async () => {
     logOut()
-      .then(() => navigate("/meeting-helper-frontend/login"))
+      .then(() => navigate("/login"))
       .catch(() => alert("Unable to sign out"));
   };
 
   const handleAssignRoles = () => {
-    navigate("/meeting-helper-frontend/admin");
+    navigate("/admin");
   };
 
   return (
