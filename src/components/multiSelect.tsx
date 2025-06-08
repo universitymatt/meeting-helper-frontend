@@ -1,5 +1,3 @@
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { type SelectChangeEvent } from "@mui/material/Select";
@@ -22,7 +20,7 @@ export default function MultipleSelect({
   setRoles,
   editing,
 }: {
-  allRoles: Role[];
+  allRoles?: Role[];
   usersRoles: string[];
   setRoles: (je: string[]) => void;
   editing: boolean;
@@ -46,11 +44,12 @@ export default function MultipleSelect({
           onChange={handleChange}
           MenuProps={MenuProps}
         >
-          {allRoles.map((role) => (
-            <MenuItem key={role.role} value={role.role}>
-              {role.role}
-            </MenuItem>
-          ))}
+          {allRoles &&
+            allRoles.map((role) => (
+              <MenuItem key={role.role} value={role.role}>
+                {role.role}
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
     </div>

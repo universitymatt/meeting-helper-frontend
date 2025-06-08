@@ -3,7 +3,13 @@ import RoomTile from "./roomTile";
 import { deleteRoom, getAllRooms } from "../../api/rooms";
 import type { RoomRes } from "../../api/responseTypes";
 
-export default function AllRoomList({ success, setSuccess }) {
+export default function AllRoomList({
+  success,
+  setSuccess,
+}: {
+  success?: string;
+  setSuccess: React.Dispatch<React.SetStateAction<string | undefined>>;
+}) {
   const [rooms, setRooms] = useState<RoomRes[]>([]);
 
   useEffect(() => {

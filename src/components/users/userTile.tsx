@@ -11,7 +11,7 @@ export default function UserTile({
 }: {
   user: SignInRes;
   setSuccess: (success: string) => void;
-  allRoles: Role[];
+  allRoles?: Role[];
 }) {
   const [usersRoles, setUsersRoles] = useState<string[]>(user.role_names);
   const [editing, setEditing] = useState<boolean>(false);

@@ -12,8 +12,7 @@ export default function AdminDashboard() {
   const authContext = useAuthContext();
   const isAdmin = authContext.user?.role_names.includes("admin");
   const navigate = useNavigate();
-  const [success, setSuccess] = useState();
-  const [error, setError] = useState("");
+  const [success, setSuccess] = useState<string>();
 
   const handleSignOut = async () => {
     logOut()

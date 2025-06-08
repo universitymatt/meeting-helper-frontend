@@ -1,3 +1,4 @@
+import type { AxiosError } from "axios";
 import type { GetRoomsReq } from "./requestTypes";
 
 export type SignInRes = {
@@ -46,3 +47,29 @@ export type Role = {
 };
 
 export type GetBookingsRes = BookingRes[];
+
+export interface ValidationError {
+  loc: (string | number)[];
+  msg: string;
+  type: string;
+  ctx?: Record<string, any>;
+}
+
+export interface FastAPIError {
+  detail: string;
+}
+
+export interface FastAPIValidationError {
+  detail: ValidationError[];
+}
+
+// Union type for all possible FastAPI error responses
+export type FastAPIErrorResponse = FastAPIError | FastAPIValidationError;
+
+export type AxiosFastAPIError = AxiosError<FastAPIErrorResponse>;
+
+export function isValidationErrorResponse(
+  data: FastAPIErrorResponse
+): data is FastAPIValidationError {
+  return Array.isArray(data.detail);
+}

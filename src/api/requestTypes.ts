@@ -23,6 +23,7 @@ export interface CreateRoomReq {
   capacity: number;
   description?: string;
   request_only?: boolean;
+  roles: string[];
 }
 
 export interface CreateBookingReq {

@@ -23,6 +23,6 @@ export const deleteRoom = (
   return api.delete(`/rooms/${room_number}`);
 };
 
-export const getAllRooms = (): Promise<AxiosResponse<GetRoomsRes>> => {
+export const getAllRooms = (): Promise<AxiosResponse<RoomRes[]>> => {
   return api.get("/rooms/all");
 };

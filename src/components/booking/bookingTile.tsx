@@ -4,6 +4,7 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import { deleteBooking, updateBooking } from "../../api/bookings";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { isAxiosError } from "axios";
 
 export default function BookingTile({
   booking,
@@ -47,15 +48,11 @@ export default function BookingTile({
       end_datetime: endTime.format(),
     };
     try {
-      updateBooking(booking.id, times).then((response) => {
-        setSuccess(`Successfully updated booking with id ${booking.id}`);
-      });
-
-      // Placeholder success message
-      setSuccess("Booking updated successfully");
+      await updateBooking(booking.id, times);
+      setSuccess(`Successfully updated booking with id ${booking.id}`);
       setEditing(false);
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.response?.status === 400) {
         setUpdateError(error.response.data.detail);
       } else {
         setUpdateError("An unexpected error occurred while updating");

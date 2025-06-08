@@ -4,8 +4,17 @@ import React, { useState } from "react";
 import { getAvailableRooms } from "../../api/rooms";
 import { NumberBox } from "../textBox";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import {
+  isValidationErrorResponse,
+  type GetRoomsRes,
+} from "../../api/responseTypes";
+import { isAxiosError } from "axios";
 
-export default function BookRoom({ onRoomsFound }) {
+export default function BookRoom({
+  onRoomsFound,
+}: {
+  onRoomsFound: (foundRooms: GetRoomsRes) => void;
+}) {
   const [minCapacity, setMinCapacity] = useState<number>(0);
   const [start, setStart] = React.useState<Dayjs | null>(null);
   const [end, setEnd] = React.useState<Dayjs | null>(null);
@@ -25,9 +34,14 @@ export default function BookRoom({ onRoomsFound }) {
         });
 
         onRoomsFound(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 422) {
-          setError(error.response.data.detail[0].msg);
+      } catch (error: unknown) {
+        if (isAxiosError(error) && error.response?.status === 422) {
+          const data = error.response.data;
+          if (isValidationErrorResponse(data)) {
+            setError(data.detail[0]?.msg || "Validation error occurred");
+          } else {
+            setError("Validation error occurred");
+          }
         } else {
           setError("An unexpected error occurred");
         }

@@ -6,7 +6,13 @@ import MultipleSelect from "../multiSelect";
 import { getAllRoles } from "../../api/roles";
 import type { Role } from "../../api/responseTypes";
 
-export function CreateRoom({ success, setSuccess }) {
+export function CreateRoom({
+  success,
+  setSuccess,
+}: {
+  success?: string;
+  setSuccess: React.Dispatch<React.SetStateAction<string | undefined>>;
+}) {
   const [roomNumber, setRoomNumber] = useState("");
   const [capacity, setCapacity] = useState(0);
   const [description, setDescription] = useState("");

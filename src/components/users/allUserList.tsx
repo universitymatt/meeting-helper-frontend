@@ -4,7 +4,13 @@ import { getAllUsers } from "../../api/users";
 import { getAllRoles } from "../../api/roles";
 import UserTile from "./userTile";
 
-export default function AllUsersList({ success, setSuccess }) {
+export default function AllUsersList({
+  success,
+  setSuccess,
+}: {
+  success?: string;
+  setSuccess: React.Dispatch<React.SetStateAction<string | undefined>>;
+}) {
   const [users, setUsers] = useState<SignInRes[]>();
   const [allRoles, setAllRoles] = useState<Role[]>();
 

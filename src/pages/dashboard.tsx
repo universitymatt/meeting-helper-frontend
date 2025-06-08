@@ -14,9 +14,9 @@ import AlertBanner from "../components/alert";
 
 export default function Dashboard() {
   const [rooms, setRooms] = useState<RoomRes[]>([]);
-  const [filters, setFilters] = useState<GetRoomsReq>(null);
-  const [bookings, setBookings] = useState<BookingRes[]>(null);
-  const [success, setSuccess] = useState<string>(null);
+  const [filters, setFilters] = useState<GetRoomsReq>();
+  const [bookings, setBookings] = useState<BookingRes[]>();
+  const [success, setSuccess] = useState<string>();
   const authContext = useAuthContext();
   const isAdmin = authContext.user?.role_names.includes("admin");
   const navigate = useNavigate();
