@@ -40,7 +40,10 @@ export function SignUp() {
         <h1 className="text-3xl font-bold mb-4">Sign Up</h1>
         <p className="text-sm mb-6">
           Already have an account?{" "}
-          <a href="/" className="text-blue-600 hover:underline">
+          <a
+            onClick={() => navigate("/")}
+            className="text-blue-600 hover:underline cursor-pointer"
+          >
             Sign in
           </a>
         </p>

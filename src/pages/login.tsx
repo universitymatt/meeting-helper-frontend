@@ -36,8 +36,11 @@ export function Login() {
         <h1 className="text-3xl font-bold mb-4">Sign in</h1>
         <p className="text-sm mb-6">
           Don't have an account?{" "}
-          <a href="/register/" className="text-blue-600 hover:underline">
-            Sign up
+          <a
+            onClick={() => navigate("/register")}
+            className="text-blue-600 hover:underline cursor-pointer"
+          >
+            Sign Up
           </a>
         </p>
         <form onSubmit={handleSubmit}>
