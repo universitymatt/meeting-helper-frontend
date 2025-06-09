@@ -41,7 +41,7 @@ export function SignUp() {
         <p className="text-sm mb-6">
           Already have an account?{" "}
           <a
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/login")}
             className="text-blue-600 hover:underline cursor-pointer"
           >
             Sign in
