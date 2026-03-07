@@ -5,14 +5,14 @@ import { signIn } from "../api/users";
 export function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!username || !password) {
-      setError("Please fill in all fields.");
+      setErrorMessage("Please fill in all fields.");
       return;
     }
 
@@ -23,9 +23,13 @@ export function Login() {
       .then(() => navigate("/"))
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          setError("Incorrect username or password");
+          setErrorMessage("Incorrect username or password");
+        } else if (error.response && error.response.status === 403) {
+          setErrorMessage(
+            "Account locked due to too many failed attempts. Try again later",
+          );
         } else {
-          setError("An unexpected error occurred");
+          setErrorMessage("An unexpected error occurred");
         }
       });
   };
@@ -74,7 +78,7 @@ export function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {error && <p className="text-red-600 mb-4">{error}</p>}
+          {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition cursor-pointer"
